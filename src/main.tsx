@@ -4,7 +4,13 @@ import { RouterProvider } from 'react-router'
 import router from './router'
 import './styles.css'
 
-createRoot(document.getElementById('root')).render(
+const container = document.getElementById('root');
+
+if (!container) {
+  throw new Error('Failed to find the root element');
+}
+
+createRoot(container).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>,
