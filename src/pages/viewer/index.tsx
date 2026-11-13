@@ -1,6 +1,9 @@
 import styles from './styles.module.css';
 import { useEffect, useRef, useState } from 'preact/hooks';
 import dcmjs from 'dcmjs';
+import { Canvas } from '../../components/Canvas';
+import { Overlay } from '../../components/Overlay';
+import { Viewport } from '../../components/Viewport';
 
 let decoderInitialization: Promise<void> | undefined;
 
@@ -168,7 +171,15 @@ export default function ViewerPage() {
 
         <main className={styles.mainContent}>
           <section className={styles.viewerSurface} aria-label='Image viewport'>
-            <canvas ref={canvasRef} className={styles.viewerCanvas} aria-label='DICOM image canvas' />
+            <Viewport>
+              <Canvas canvasRef={canvasRef} />
+              <Overlay>
+                <Overlay.TopLeftCorner />
+                <Overlay.TopRightCorner />
+                <Overlay.BottomLeftCorner />
+                <Overlay.BottomRightCorner />
+              </Overlay>
+            </Viewport>
           </section>
         </main>
       </div>

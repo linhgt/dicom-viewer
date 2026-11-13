@@ -1,0 +1,47 @@
+.overlay {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  max-width: 50%;
+  max-height: 50%;
+  overflow: auto;
+  padding: 0.75rem;
+  color: #e5e9ed;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  text-shadow: 0 1px 3px #000;
+}
+
+.corner :global(button),
+.corner :global(a),
+.corner :global([role='button']),
+.corner :global([data-overlay-interactive]) {
+  pointer-events: auto;
+}
+
+.topLeft {
+  top: 0;
+  left: 0;
+}
+
+.topRight {
+  top: 0;
+  right: 0;
+  text-align: right;
+}
+
+.bottomLeft {
+  bottom: 0;
+  left: 0;
+}
+
+.bottomRight {
+  right: 0;
+  bottom: 0;
+  text-align: right;
+}
