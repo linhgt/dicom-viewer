@@ -1,9 +1,9 @@
 import { defineConfig } from "vite";
 import path from "path";
-import react from "@vitejs/plugin-react";
+import preact from "@preact/preset-vite";
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [preact({ reactAliasesEnabled: false })],
 
   resolve: {
     alias: {
@@ -14,17 +14,6 @@ export default defineConfig({
     target: "es2022",
     outDir: "dist",
     sourcemap: "hidden",
-    minify: "esbuild",
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes("node_modules")) {
-            return "vendor";
-          }
-          return null;
-        },
-      },
-    },
   },
   server: {
     port: 5173,

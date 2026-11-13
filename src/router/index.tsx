@@ -1,16 +1,25 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { lazy, LocationProvider, Route, Router, useLocation } from 'preact-iso';
+import { useEffect } from 'preact/hooks';
 
-import ViewerPage from "../pages/viewer";
+const ViewerPage = lazy(() => import('../pages/viewer'));
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Navigate to="/viewer" replace />,
-  },
-  {
-    path: "/viewer",
-    Component: ViewerPage,
-  },
-]);
+function RedirectToViewer() {
+  const { route } = useLocation();
 
-export default router;
+  useEffect(() => {
+    route('/viewer', true);
+  }, [route]);
+
+  return null;
+}
+
+export default function AppRouter() {
+  return (
+    <LocationProvider>
+      <Router>
+        <Route path='/' component={RedirectToViewer} />
+        <Route path='/viewer' component={ViewerPage} />
+      </Router>
+    </LocationProvider>
+  );
+}
